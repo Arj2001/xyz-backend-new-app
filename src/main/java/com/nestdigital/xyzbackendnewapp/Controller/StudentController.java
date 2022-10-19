@@ -1,14 +1,22 @@
 package com.nestdigital.xyzbackendnewapp.Controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.nestdigital.xyzbackendnewapp.Model.StudentModel;
+import com.nestdigital.xyzbackendnewapp.dao.StudentDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 
 public class StudentController {
 
-    @PostMapping("/studentEntry")
-    public String studentEntry(){
-        return "Test";
+    @Autowired
+    private StudentDao dao;
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/studentEntry",consumes = "application/json", produces = "application/json")
+    public String studentEntry(@RequestBody StudentModel student){
+        System.out.println(student.toString());
+        dao.save(student);
+        return "{status:'success'}";
     }
 }
