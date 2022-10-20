@@ -1,6 +1,7 @@
 package com.nestdigital.xyzbackendnewapp.Controller;
 
 import com.nestdigital.xyzbackendnewapp.Model.FacultyModel;
+import com.nestdigital.xyzbackendnewapp.Model.StudentModel;
 import com.nestdigital.xyzbackendnewapp.dao.FacutltyDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,5 +34,10 @@ public class FacultyController {
         return "success";
     }
 
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchFaculty",consumes = "application/json", produces = "application/json")
+    public List<FacultyModel> facultyStudent(@RequestBody FacultyModel faculty){
+        return (List<FacultyModel>) dao.searchFaculty(faculty.getName());
+    }
 
 }

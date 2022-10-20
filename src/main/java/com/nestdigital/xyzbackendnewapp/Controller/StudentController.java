@@ -36,4 +36,11 @@ public class StudentController {
         dao.deleteById(student.getId());
         return "{status:'success'}";
     }
+
+
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchStudent",consumes = "application/json", produces = "application/json")
+    public List<StudentModel> searchStudent(@RequestBody StudentModel student){
+        return (List<StudentModel>) dao.searchStudent(student.getName(),student.getAdmission_no());
+    }
 }
